@@ -30,11 +30,14 @@ class TasksController extends Controller
     public function create()
     {
         $task = new Task;
-
-        // メッセージ作成ビューを表示
+       if (\Auth::check()) { // 認証済みの場合
+        // タスク作成ビューを表示
         return view('tasks.create', [
             'task' => $task,
         ]);
+       }else{
+    return redirect('/');
+}        
     }
 
     // postでtasks/にアクセスされた場合の「新規登録処理」
